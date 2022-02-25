@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools { 
-        maven 'maven3' 
+        maven 'maven' 
         
     }
     stages {
@@ -19,7 +19,7 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage ('Build') {
+        stage ('deploy') {
             steps {
               deploy adapters: [tomcat9(credentialsId: 'tomcatdeployer', path: '', url: 'http://52.66.208.18:8080')], contextPath: 'SimpleTomcatWebApp', onFailure: false, war: '**/*.war'  
            }
