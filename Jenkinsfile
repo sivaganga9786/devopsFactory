@@ -18,6 +18,12 @@ pipeline {
             steps {
                 sh 'mvn clean install'
             }
+        stage ('Build') {
+            steps {
+              deploy adapters: [tomcat9(credentialsId: 'tomcatdeployer', path: '', url: 'http://52.66.208.18:8080')], contextPath: 'SimpleTomcatWebApp', onFailure: false, war: '**/*.war'  
+            }
+            
         }
+        
     }
 }
