@@ -20,8 +20,9 @@ pipeline {
             }
         }
         stage ('deploy') {
-            
-           
+            when {
+               branch 'main'
+           }
              input {
                 message "Can we Proceed?"
                 ok "Yes"
@@ -30,7 +31,9 @@ pipeline {
                     string(name: 'PERSON', defaultValue: 'padmaraju', description: 'Member')
                 }
             }
-            
+            steps {
+              deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://3.234.206.5:8080/')], contextPath: 'sampletomcatwebapp', war: '**/*.war'  
+           }
             
         }
         
