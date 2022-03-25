@@ -20,9 +20,8 @@ pipeline {
             }
         }
         stage ('deploy') {
-            // when {
-             //   branch 'main'
-            }
+            
+           
              input {
                 message "Can we Proceed?"
                 ok "Yes"
